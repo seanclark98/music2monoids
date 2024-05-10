@@ -17,7 +17,7 @@ where $n_k$ is the $l$-note chord of type $k$ with root $n$.
 
 $\rm Definition\ 3.\quad$
 Given $T_{i,j}^m : H_l \rightarrow H_l$.
-Define $\mathcal{G}_l = \{T_{i,j}^m : (n_k, (n_k)T_{i,j}^m) \in \mathcal{P}_{1,0}$ or $(n_k)T_{i,j}^m = n_k\text{ for all }k\}$.
+Define $\mathcal{G}\_l = \\{T_{i,j}^m : (n_k, (n_k)T_{i,j}^m) \in \mathcal{P}\_{1,0}\text{ or }(n_k)T_{i,j}^m = n_k\text{ for all }k\\}$.
 
 $\rm Definition\ 4.\quad$
 Define $\phi_t : S_t \rightarrow Aut(\mathbb{Z}_{12}^{t-1})$ by
