@@ -1,10 +1,14 @@
 from itertools import product
 
+from sage.all_cmdline import gap
+
 from .chords import all_chord_types
 from .parsimonious_relation import ParsimoniousRelation
 
 
-def all_permutations(length: int) -> set[tuple[int, ...]]:
+def all_permutations(length: int) -> list[gap.Transformation]:
+    """All parsimonious transformations (as permutations) on the set of all
+    n-chords."""
     permutations = set()
 
     for from_chord_type, to_chord_type in product(all_chord_types(length), repeat=2):
@@ -15,4 +19,4 @@ def all_permutations(length: int) -> set[tuple[int, ...]]:
             permutation = relation.as_permutation()
             if permutation is not None and permutation not in permutations:
                 permutations.add(permutation)
-    return permutations
+    return [gap.Transformation(perm) for perm in permutations]

@@ -46,8 +46,12 @@ class ParsimoniousRelation:
 
         for root in range(12):
             from_chord = Chord(*self.from_chord_type) + root
-            permutation[from_chord.index] = self(from_chord).index + 1
+            parsimonious_from_chord = self(from_chord)
+            assert parsimonious_from_chord is not None
+            permutation[from_chord.index] = parsimonious_from_chord.index + 1
 
             to_chord = Chord(*self.to_chord_type) + root
-            permutation[to_chord.index] = self(to_chord).index + 1
+            parsimonious_to_chord = self(to_chord)
+            assert parsimonious_to_chord is not None
+            permutation[to_chord.index] = parsimonious_to_chord.index + 1
         return tuple(permutation)
