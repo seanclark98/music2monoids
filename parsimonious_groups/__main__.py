@@ -22,4 +22,7 @@ if __name__ == "__main__":
         # => group_generated_by_Q is isomorphic to R
         # => C12^(t-1) is isomorphic to R
 
+        # TODO: Prove that the subgroup of parallel chord transformations
+        # is isomorphic to S_t
+
         print("\n")
