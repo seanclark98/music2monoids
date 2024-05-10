@@ -20,9 +20,9 @@ Define $\mathcal{G}_l = \{T_{i,j}^m : (n_k, (n_k)T_{i,j}^m) \in \mathcal{P}_{1,0
 $\rm Definition\ 4.\>$
 Define $\phi_t : S_t \rightarrow Aut(\mathbb{Z}_{12}^{t-1})$ by
 
-$$(\bm{v})((\sigma)\phi_t) = \bm{w}$$
+$$(\boldsymbol{v})((\sigma)\phi_t) = \boldsymbol{w}$$
 
-where $\sigma \in S_t, \bm{v} = (v_1,...,v_{t-1}), \bm{w} = (w_1,...,w_{t-1})$ and
+where $\sigma \in S_t, \boldsymbol{v} = (v_1,...,v_{t-1}), \boldsymbol{w} = (w_1,...,w_{t-1})$ and
 $$
 w_i = \begin{cases}
       v_{(i)\sigma^{-1}} & 1 \leq (i)\sigma^{-1} \leq t-1 \\
