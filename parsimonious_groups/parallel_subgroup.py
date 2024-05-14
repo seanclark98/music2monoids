@@ -3,6 +3,9 @@ from sage.all_cmdline import gap
 from .chords import no_of_types
 
 
+# Note: Transposition here refers to mathematical permutation transpositions
+# this is confusing when also referring to musical transpositions
+# TODO: Update terms to avoid confusion
 def is_transposition_in_gens(
     a: int, b: int, n_types: int, gens: list[gap.Transformation]
 ) -> bool:

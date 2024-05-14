@@ -1,7 +1,8 @@
 from sage.all_cmdline import gap
 
 from .chords import no_of_types
-from .parsimonious_group import transformation_group_on_all_tertian_n_chords
+from .parallel_subgroup import all_transpositions_in_gens
+from .parsimonious_group import all_permutations
 from .transposition_subgroup import (
     is_isomorphic_to_c12_direct_product,
     possible_gens_for_R,
@@ -9,8 +10,10 @@ from .transposition_subgroup import (
 
 if __name__ == "__main__":
     for n in range(2, 12):  # n = chord_length
-        print(f"Transformation Semigroup on the set of all tertian {n}-chords")
-        G = transformation_group_on_all_tertian_n_chords(n)
+        # print(f"Transformation Semigroup on the set of all tertian {n}-chords")
+        gens = all_permutations(n)
+        # transformation group on all tertian n chords
+        G = gap.Group(all_permutations(n))
         t = no_of_types(n)
 
         # Prove that C12^(t-1) is isomorphic to R
@@ -22,7 +25,6 @@ if __name__ == "__main__":
         # => group_generated_by_Q is isomorphic to R
         # => C12^(t-1) is isomorphic to R
 
-        # TODO: Prove that the subgroup of parallel chord transformations
-        # is isomorphic to S_t
-
-        print("\n")
+        P = gap.Group(all_transpositions_in_gens(n, gens))
+        structure = gap.StructureDescription(P)
+        assert structure == f"S{t}"
