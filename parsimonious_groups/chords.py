@@ -1,12 +1,9 @@
 from collections import Counter
-from enum import Enum
 from functools import lru_cache
 
 
 @lru_cache(maxsize=None)
 def all_chord_types(length: int) -> list["Chord"]:
-    # Note: Chord types are represented here by Chords with root 0
-    # TODO: Update to use tuples or ChordType class
     if length == 1:
         return [Chord(0)]
     chords = []
@@ -55,17 +52,6 @@ def root_and_type_to_index(root: int, chord_type_index: int, length: int) -> int
     )
 
 
-class ChordType(Enum):
-    DOMINANT = (0, 4, 7, 10)
-    MINOR_7TH = (0, 3, 7, 10)
-    HALF_DIMINISHED = (0, 3, 6, 10)
-    MAJOR_7TH = (0, 4, 7, 11)
-    DIMINISHED = (0, 3, 6, 9)
-
-    def __getitem__(self, key: int) -> int:
-        return self.value[key]
-
-
 class Chord:
     def __init__(self, *pitch_classes: int):
         self.pitch_classes = tuple([pitch_class % 12 for pitch_class in pitch_classes])
@@ -100,6 +86,9 @@ class Chord:
         """Transpose chord by interval."""
         return Chord(*[pitch_class + interval for pitch_class in self.pitch_classes])
 
+    def __contains__(self, item: object) -> bool:
+        return item in self.pitch_classes
+
     def equivalent(self, other: "Chord") -> bool:
         return set(self.pitch_classes) == set(other.pitch_classes)
 
@@ -123,15 +112,3 @@ class Chord:
     @property
     def index(self) -> int:
         return chord_to_index(self)
-
-    @property
-    def chord_type(self) -> ChordType | None:
-        intervals = tuple(
-            [(pitch_class - self.root) % 12 for pitch_class in self.pitch_classes]
-        )
-        try:
-            return ChordType(intervals)
-        except ValueError as e:
-            if f"is not a valid {ChordType.__name__}" not in str(e):
-                raise
-            return None

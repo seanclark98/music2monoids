@@ -38,20 +38,20 @@ class ParsimoniousRelation:
         to_chord = Chord(*self.to_chord_type) + self.root_shift
         return from_chord.parsimonious(to_chord)
 
-    def as_permutation(self) -> tuple[int, ...] | None:
+    def as_transformation(self) -> tuple[int, ...] | None:
         if not self.is_parsimonious():
             return None
 
-        permutation = list(range(1, len(all_chords(self.chord_length)) + 1))
+        transformation = list(range(1, len(all_chords(self.chord_length)) + 1))
 
         for root in range(12):
             from_chord = Chord(*self.from_chord_type) + root
             parsimonious_from_chord = self(from_chord)
             assert parsimonious_from_chord is not None
-            permutation[from_chord.index] = parsimonious_from_chord.index + 1
+            transformation[from_chord.index] = parsimonious_from_chord.index + 1
 
             to_chord = Chord(*self.to_chord_type) + root
             parsimonious_to_chord = self(to_chord)
             assert parsimonious_to_chord is not None
-            permutation[to_chord.index] = parsimonious_to_chord.index + 1
-        return tuple(permutation)
+            transformation[to_chord.index] = parsimonious_to_chord.index + 1
+        return tuple(transformation)

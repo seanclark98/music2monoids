@@ -49,14 +49,3 @@ def possible_gens_for_R(n_types: int) -> list[gap.Transformation]:
     return [
         phi(gen, n_types) for gen in subset_of_direct_product_of_cyclic_groups(n_types)
     ]
-
-
-def c12_pow(n: int) -> str:
-    return " x ".join(["C12"] * n)
-
-
-def is_isomorphic_to_c12_direct_product(group: gap.Group, k: int) -> bool:
-    """
-    k: number of direct products of C12
-    """
-    return str(gap.StructureDescription(group)) == c12_pow(k)
