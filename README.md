@@ -1,3 +1,14 @@
+# Music2Monoids
+
+This proof relies on Sage and its interface to GAP. Install Sage or spin up a container with the Dockefile provided (`.devcontainer/Dockerfile`).
+
+To execute this package as a script, run:
+
+```
+python -m parsimonious_groups
+```
+
+## Theorem
 
 $\rm Definition\ 1.\quad$
 Define $H_l$ to be the set of all tertian $l$-note chords.
