@@ -17,7 +17,7 @@ def all_chord_types(length: int) -> list["Chord"]:
 @lru_cache(maxsize=None)
 def all_chords(length: int) -> list["Chord"]:
     chord_types = all_chord_types(length)
-    return [chord_type + i for i in range(12) for chord_type in chord_types]
+    return [chord_type + i for chord_type in chord_types for i in range(12)]
 
 
 @lru_cache(maxsize=None)
@@ -36,20 +36,8 @@ def no_of_types(length: int) -> int:
     return int(len(all_chord_types(length)))
 
 
-@lru_cache(maxsize=None)
-def index_to_chord_type_index(index: int, length: int) -> int:
-    return index % no_of_types(length)
-
-
-@lru_cache(maxsize=None)
-def index_to_root(index: int, length: int) -> int:
-    return index // no_of_types(length)
-
-
-def root_and_type_to_index(root: int, chord_type_index: int, length: int) -> int:
-    return int(
-        (root * no_of_types(length) + chord_type_index) % len(all_chords(length))
-    )
+def root_and_type_to_index(root: int, chord_type_index: int, n_types: int) -> int:
+    return int(((root % 12) + chord_type_index * 12) % (n_types * 12))
 
 
 class Chord:

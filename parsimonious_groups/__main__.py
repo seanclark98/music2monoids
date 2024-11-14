@@ -22,6 +22,7 @@ if __name__ == "__main__":
         )
         print(f"Checking P is isomorphic to S_{t}...")
         assert gap.IsIsomorphicGroup(P, gap.SymmetricGroup(t))
+        # TODO: Try t=8 with gap.Morphium and gap.PatheticIsomorphism
 
         # Prove that C12^(t-1) is isomorphic to R
         Q = [gap.AsPermutation(trans) for trans in possible_gens_for_R(t)]

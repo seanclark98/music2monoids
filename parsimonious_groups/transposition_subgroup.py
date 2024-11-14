@@ -7,6 +7,8 @@ where t=no_of_types(n) and n is the chord length.
 
 from sage.all_cmdline import gap
 
+from .chords import root_and_type_to_index
+
 
 def perm_and_tuple_to_transformation(
     perm: list[int], tup: list[int], n_types: int
@@ -21,9 +23,9 @@ def perm_and_tuple_to_transformation(
     for chord_type in range(0, n_types):
         for root in range(0, 12):
             transpose = tup[chord_type]
-            trans[chord_type + root * n_types] = (
-                perm[chord_type] + root * n_types + transpose * n_types
-            ) % n_chords
+            trans[
+                root_and_type_to_index(root, chord_type, n_types)
+            ] = root_and_type_to_index(root + transpose, perm[chord_type], n_types)
 
     return gap.Transformation([x + 1 for x in trans])
 

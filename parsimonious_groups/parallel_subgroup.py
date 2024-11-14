@@ -1,28 +1,28 @@
 from sage.all_cmdline import gap
 
-from .chords import no_of_types
+from .chords import no_of_types, root_and_type_to_index
 
 
 # Note: Transposition here refers to mathematical permutation transpositions
 # this is confusing when also referring to musical transpositions
 # TODO: Update terms to avoid confusion
 def is_transposition_in_gens(
-    a: int, b: int, n_types: int, gens: list[gap.Transformation]
+    type_a: int, type_b: int, n_types: int, gens: list[gap.Transformation]
 ) -> bool:
     # TODO: rewrite with a and b being instances of `Chord` instead of integers
     src = []
     dst = []
 
-    n_chords = 12 * n_types
-    while a <= n_chords:
+    for i in range(12):
+        a = root_and_type_to_index(i, type_a - 1, n_types) + 1
+        b = root_and_type_to_index(i, type_b - 1, n_types) + 1
+
         src.append(a)
         dst.append(b)
 
         src.append(b)
         dst.append(a)
 
-        a = a + n_types
-        b = ((b + n_types - 1) % n_chords) + 1
     return gap.TransformationListList(src, dst) in gens
 
 
@@ -35,10 +35,12 @@ def all_transpositions_in_gens(
     transpositions = []
     n_types = no_of_types(n)
 
-    for i in range(1, n_types + 1):
-        for j in range(1, n_types + 1):
-            if j == i:
+    for type_a in range(1, n_types + 1):
+        for type_b in range(1, n_types + 1):
+            if type_b == type_a:
                 continue
-            if is_transposition_in_gens(i, j, n_types, gens):
-                transpositions.append(gap.Transformation([i, j], [j, i]))
+            if is_transposition_in_gens(type_a, type_b, n_types, gens):
+                transpositions.append(
+                    gap.Transformation([type_a, type_b], [type_b, type_a])
+                )
     return transpositions
